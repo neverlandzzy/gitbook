@@ -24,8 +24,8 @@
 2. **ordered comparison between pointer and zero**
 
     ```cpp
-    /Users/neverland/jvm/jdk8u/hotspot/src/share/vm/opto/lcm.cpp:52:35: error: ordered comparison between pointer and zero ('address' (aka 'unsigned char *') and 'int')
-  if (Universe::narrow_oop_base() > 0) { // Implies UseCompressedOops.
+    /Users/neverland/jvm/jdk8u/hotspot/src/share/vm/opto/lcm.cpp:52:35: error: ordered comparison between pointer and zero ('address' (aka 'unsigned char *') and 'int') 
+    if (Universe::narrow_oop_base() > 0) { // Implies UseCompressedOops.
       ~~~~~~~~~~~~~~~~~~~~~~~~~~~ ^ ~
      ```
     

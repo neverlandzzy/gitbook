@@ -28,5 +28,19 @@
     if (Universe::narrow_oop_base() > 0) { // Implies UseCompressedOops.
       ~~~~~~~~~~~~~~~~~~~~~~~~~~~ ^ ~
      ```
+     将 /Users/neverland/jvm/jdk8u/hotspot/src/share/vm/opto/lcm.cpp 中的
+     ```cpp
+     if (Universe::narrow_oop_base() > 0)
+     ```
+     改为
+     ```cpp
+     if (Universe::narrow_oop_base() != 0)
+     ```
+3. **ordered comparison between pointer and zero (‘const TypeInt *’ and ‘int’)**
+    
+    ```cpp
+    /Users/neverland/jvm/jdk8u/hotspot/src/share/vm/opto/loopPredicate.cpp:781:73: error: ordered comparison between pointer and zero ('const TypeInt *' and 'int')
+    assert(rng->Opcode() == Op_LoadRange || _igvn.type(rng)->is_int() >= 0, "must be");
+    ```
     
 

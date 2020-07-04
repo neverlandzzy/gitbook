@@ -55,16 +55,39 @@
     ```bash
     /Users/neverland/jvm/jdk8u/hotspot/src/share/vm/runtime/virtualspace.cpp:345:14: error: ordered comparison between pointer and zero ('char *' and 'int')
     if (base() > 0) {
-      ~~~~~~ ^ ~
-      Compiling /Users/nev
-     ```
+     ~~~~~~ ^ ~
+     Compiling /Users/nev
+    ```
      将 /Users/neverland/jvm/jdk8u/hotspot/src/share/vm/runtime/virtualspace.cpp 中的
-     ```cpp
-     if (base() > 0) {
-     ```
+    ```cpp
+    if (base() > 0) {
+    ```
      改为
-     ```
-     if (base() ！= 0) {
-     ```
-     
+    ```
+    if (base() ！= 0) {
+    ```
+5. **Undefined symbols for architecture x86_64** 
+    ```bash
+    Undefined symbols for architecture x86_64:
+    "_attachCurrentThread", referenced from:
+      +[ThreadUtilities getJNIEnv] in ThreadUtilities.o
+      +[ThreadUtilities getJNIEnvUncached] in ThreadUtilities.o
+      ld: symbol(s) not found for architecture x86_64
+      clang: error: linker command failed with exit code 1 (use -v to see invocation)
+    ```
+    将 /Users/neverland/jvm/jdk8u/jdk/src/macosx/native/sun/osxapp/ThreadUtilities.m 中的
+    ```cpp
+    inline void attachCurrentThread(void** env) {
+    ```
+    改为
+    ```cpp
+    void attachCurrentThread(void** env) {
+    ```
+6. **runtime fatal error**
+    ```bash
+    ```
+    将 /Users/neverland/jvm/jdk8u/hotspot/src/share/vm/runtime/perfData.cpp 中 void PerfDataManager::destroy() 的 delete p 注释掉
+    ```cpp
+    ```
+    
 

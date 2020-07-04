@@ -4,7 +4,7 @@
 
 1. **HEAP\_REGION\_SET\_FORCE\_VERIFY undefined**
 
-   ```cpp
+   ```bash
     /Users/neverland/jvm/jdk8u/hotspot/src/share/vm/gc_implementation/g1/heapRegionSet.hpp:38:38: note: expanded from macro 'HEAP_REGION_SET_FORCE_VERIFY'
     #define HEAP_REGION_SET_FORCE_VERIFY defined(ASSERT)
    ```
@@ -23,7 +23,7 @@
 
 2. **ordered comparison between pointer and zero**
 
-    ```cpp
+    ```bash
     /Users/neverland/jvm/jdk8u/hotspot/src/share/vm/opto/lcm.cpp:52:35: error: ordered comparison between pointer and zero ('address' (aka 'unsigned char *') and 'int') 
     if (Universe::narrow_oop_base() > 0) { // Implies UseCompressedOops.
       ~~~~~~~~~~~~~~~~~~~~~~~~~~~ ^ ~
@@ -38,7 +38,7 @@
      ```
 3. **ordered comparison between pointer and zero (‘const TypeInt \*’ and ‘int’)**
     
-    ```cpp
+    ```bash
     /Users/neverland/jvm/jdk8u/hotspot/src/share/vm/opto/loopPredicate.cpp:781:73: error: ordered comparison between pointer and zero ('const TypeInt *' and 'int')
     assert(rng->Opcode() == Op_LoadRange || _igvn.type(rng)->is_int() >= 0, "must be");
     ```
@@ -50,5 +50,21 @@
     ```cpp
     _igvn.type(rng)->is_int()->_lo >= 0
     ```
-    
+4. **ordered comparison between pointer and zero (‘char \*’ and ‘int’)**
+
+    ```bash
+    /Users/neverland/jvm/jdk8u/hotspot/src/share/vm/runtime/virtualspace.cpp:345:14: error: ordered comparison between pointer and zero ('char *' and 'int')
+    if (base() > 0) {
+      ~~~~~~ ^ ~
+      Compiling /Users/nev
+     ```
+     将 /Users/neverland/jvm/jdk8u/hotspot/src/share/vm/runtime/virtualspace.cpp 中的
+     ```cpp
+     if (base() > 0) {
+     ```
+     改为
+     ```
+     if (base() ！= 0) {
+     ```
+     
 
